@@ -1,0 +1,15 @@
+[
+    {
+   "ParameterKey": "Environment",
+   "ParameterValue": "dev"
+ },
+ {
+   "ParameterKey": "LambdaName",
+   "ParameterValue": "delVpc"
+ },
+ {
+  "ParameterKey": "DeploymentArtifactBucket",
+  "ParameterValue": "cf-templates-1lbzbbs35uas-us-west-2"
+}
+
+] 

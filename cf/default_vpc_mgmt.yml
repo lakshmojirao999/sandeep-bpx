@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Lambda to delete default vpc in account
+Parameters:
+  Environment:
+    Description: 'Environment [Dev, QA, UAT, Prod]'
+    Type: String
+    AllowedValues:
+      - dev
+      - qa
+      - prod
+  LambdaName:
+    Description: 'Short, Machine Friendly Name for the lambda'
+    Type: String
+    Default: delvpc
+  DeploymentArtifactBucket:
+    Description: S3 Bucket of Deployment Artifacts
+    Type: String
+
+Resources:
+  LambdaExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !Sub '${LambdaName}-${Environment}-LambdaExecutionRole'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+  LambdaExecutionPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: !Sub '${LambdaName}-${Environment}-LambdaExecutionPolicy'
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'logs:CreateLogGroup'
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+            Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:*'
+          - Effect: Allow
+            Action: 'cloudwatch:PutMetricData'
+            Resource: '*'
+          - Effect: Allow
+            Action:
+              - 'ec2:DescribeInterfaces'
+              - 'ec2:CreateNetworkInterface'
+              - 'ec2:AttachNetworkInterface'
+              - 'ec2:DeleteNetworkInterface'
+              - 'ec2:DescribeNetworkInterfaces'
+              - 'ec2:*'
+            Resource: '*'
+      Roles:
+        - !Ref LambdaExecutionRole
+  delVpcLambda:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: !Sub '${LambdaName}-${Environment}'
+      Description: !Sub Handles deletion of Default VPC
+      Handler: delVpc.lambda_handler
+      Runtime: python3.7
+      Timeout: 60
+      MemorySize: 256
+      Code:
+        S3Bucket: !Ref DeploymentArtifactBucket
+        S3Key: !Sub ${Environment}/cf/lambda/delVpc.zip       
+      Role: !GetAtt LambdaExecutionRole.Arn
+    DependsOn:
+      - LambdaExecutionRole
+  LambdaEvent:
+    Type: 'AWS::Events::Rule'
+    Properties:
+      Description: !Sub 'Lambda event for ${LambdaName} lambda in the ${Environment} Environment'
+      Name: !Sub '${LambdaName}-${Environment}-1'
+      ScheduleExpression: cron(0/5 * * * ? *)
+      Targets:
+        - Id: !Sub '${LambdaName}-${Environment}-1'
+          Arn: !GetAtt delVpcLambda.Arn
+
+  LambdaSchedulePermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !GetAtt delVpcLambda.Arn
+      Principal: 'events.amazonaws.com'
+      SourceArn: !GetAtt LambdaEvent.Arn          
