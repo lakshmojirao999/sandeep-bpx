@@ -1,0 +1,1539 @@
+---
+#Default region for deploying Custom Control Tower: Code Pipeline, Step functions, Lambda, SSM parameters, and StackSets
+region: us-east-1
+version: 2021-03-15
+
+# Control Tower Custom CloudFormation Resources
+resources:
+
+# ###############################################################################
+# # BEGIN Dynatracelogs-Pre-1 (Pre-Deployment StackSet)                         #
+# ###############################################################################
+  # - name: PIN-NonProd-Dynatracelogs-Pre-1
+  #   resource_file: templates/dynatrace-aws-logs-pre-1-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-pre-1/pin-nonprod-dynatrace-aws-logs-pre-1-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #   regions:
+  #     - us-east-1
+  # - name: PCN-NonProd-Dynatracelogs-Pre-1
+  #   resource_file: templates/dynatrace-aws-logs-pre-1-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-pre-1/pcn-nonprod-dynatrace-aws-logs-pre-1-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #   regions:
+  #     - us-east-1
+  # - name: Shared-Services-NonProd-Dynatracelogs-Pre-1
+  #   resource_file: templates/dynatrace-aws-logs-pre-1-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-pre-1/ss-nonprod-dynatrace-aws-logs-pre-1-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+# ###############################################################################
+# # END SECTION Dynatracelogs-Pre-1                                             #
+# ###############################################################################
+
+
+# ###############################################################################
+# # BEGIN Dynatracelogs                                                         #
+# ###############################################################################
+  # - name: PIN-NonProd-Dynatracelogs
+  #   resource_file: templates/dynatrace-aws-logs-forwarder-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-forwarder/pin-nonprod-dynatrace-aws-logs-forwarder-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #   regions:
+  #     - us-east-1
+  # - name: PCN-NonProd-Dynatracelogs
+  #   resource_file: templates/dynatrace-aws-logs-forwarder-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-forwarder/pcn-nonprod-dynatrace-aws-logs-forwarder-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #   regions:
+  #     - us-east-1
+  # - name: Shared-Services-NonProd-Dynatracelogs
+  #   resource_file: templates/dynatrace-aws-logs-forwarder-template.yaml
+  #   parameter_file: parameters/dynatrace-aws-logs-forwarder/ss-nonprod-dynatrace-aws-logs-forwarder-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+# ###############################################################################
+# # END SECTION Dynatracelogs                                                   #
+# ###############################################################################
+
+###############################################################################
+# BEGIN SECTION Admin Role in Master Control Tower Account StackSet                                              #
+###############################################################################
+  # - name: ct-admin-role
+  #   resource_file: templates/ct-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/ct-create-admin-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END SECTION Admin Role in Master Control Tower Account StackSet                                        #
+###############################################################################
+
+
+###############################################################################
+# BEGIN SECTION Automation Role in Master Control Tower Account StackSet                                              #
+###############################################################################
+  # - name: ct-automation-role
+  #   resource_file: templates/ct-create-automation-role-template.yaml
+  #   parameter_file: parameters/common/ct-create-automation-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END SECTION Automation Role in Master Control Tower Account StackSet                                        #
+###############################################################################
+
+###############################################################################
+# BEGIN SECTION CT Admin Role in Master Control Tower Account StackSet                                              #
+###############################################################################
+  # - name: ct-ctadmin-role
+  #   resource_file: templates/ct-create-ct-admin-role-template.yaml
+  #   parameter_file: parameters/common/ct-create-ct-admin-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END SECTION CT Admin Role in Master Control Tower Account StackSet                                        #
+###############################################################################
+
+###############################################################################
+# BEGIN SECTION Read Only Role in Master Control Tower Account StackSet                                              #
+###############################################################################
+  # - name: ct-readonly-role
+  #   resource_file: templates/ct-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/ct-create-readonly-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END SECTION Read Only Role in Master Control Tower Account StackSet                                        #
+###############################################################################
+
+###############################################################################
+# BEGIN SECTION Security Audit Role in Master Control Tower Account StackSet                                              #
+###############################################################################
+  # - name: ct-sec-audit-role
+  #   resource_file: templates/ct-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/ct-create-secaudit-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+# ###############################################################################
+# # END SECTION Security Audit Role in Master Control Tower Account StackSet                                        #
+# ###############################################################################
+
+###############################################################################
+# BEGIN SECTION Microsoft Sentinel Role StackSet                                              #
+###############################################################################
+  # - name: ms-sentinel-role
+  #   resource_file: templates/zone-aws-create-microsoft-sentinel-role-template.yaml
+  #   parameter_file: parameters/common/zone-aws-create-microsoft-sentinel-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Root
+  #   regions:
+  #     - us-east-1
+ 
+  # - name: ms-sentinel-role-nonprod
+  #   resource_file: templates/zone-aws-create-microsoft-sentinel-role-template.yaml
+  #   parameter_file: parameters/common/zone-aws-create-microsoft-sentinel-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #       - 462486774025
+  #       - 235676957572
+  #       - 400793498197
+  #       - 477118407689
+  #       - 552614023257
+  #       - 685572485099
+  #       - 961497627505
+  #       - 000419854131
+  #       - 438265644178
+  #       - 826024395643
+  #       - 330036246856
+  #       - 031498485136
+  #   regions:
+  #     - us-east-1
+
+  # - name: ms-sentinel-role-stage
+  #   resource_file: templates/zone-aws-create-microsoft-sentinel-role-template.yaml
+  #   parameter_file: parameters/common/zone-aws-create-microsoft-sentinel-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END SECTION Microsoft Sentinel Role StackSet                                        #
+###############################################################################
+
+###############################################################################
+# BEGIN CT Lambda for Describe Account                                       #
+###############################################################################
+  # - name: CT-Lambda-DescribeAccount
+  #   resource_file: templates/ct-aws-describeaccount-template.yaml
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 452975980383
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END CT Lambda for Describe Account                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account SAML Provider Setup                                              #
+###############################################################################
+ 
+  # - name: Corp-Saml-Provider
+  #   resource_file: templates/aws-create-saml-provider-template.yaml
+  #   parameter_file: parameters/common/corp-aws-default-SAML-Provider-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #   regions:
+  #     - us-east-1
+
+
+###############################################################################
+# END SECTION Sub Account SAML Provider Setup                                        #
+###############################################################################
+
+
+###############################################################################
+# BEGIN Sub Account Admin Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Admin-Role
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-admin-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Admin-Role
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-admin-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Admin-Role
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-admin-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Admin-Role-nonprod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-admin-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Admin-Role-nonprod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-admin-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Admin-Role-nonprod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-admin-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Admin-Role-stage
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-admin-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Admin-Role-stage
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-admin-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+  # - name: SS-Admin-Role-nonprod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-admin-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+
+  #   regions:
+  #     - us-east-1
+
+  # - name: SS-Admin-Role-prod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-admin-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+  
+  # - name: core-Admin-Role-prod
+  #   resource_file: templates/corp-aws-create-admin-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-admin-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END Sub Account Admin Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account Application Developer Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Application-Developer-Role
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-appldev-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Application-Developer-Role
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-appldev-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Application-Developer-Role
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-appldev-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Application-Developer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-appldev-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Application-Developer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-appldev-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Application-Developer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-appldev-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Application-Developer-Role-stage
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-appldev-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Application-Developer-Role-stage
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-appldev-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+  
+  # - name: ss-Application-Developer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-appldev-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Application-Developer-Role-prod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-appldev-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+  
+  # - name: core-Application-Developer-Role-prod
+  #   resource_file: templates/corp-aws-create-appldev-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-appldev-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+###############################################################################
+# END Sub Account Application Developer Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account Cloud Engineer Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Cloud-Engineer-Role
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-ce-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Cloud-Engineer-Role
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-ce-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Cloud-Engineer-Role
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-ce-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Cloud-Engineer-Role
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-ce-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Cloud-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-ce-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Cloud-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-ce-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Cloud-Engineer-Role-stage
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-ce-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Cloud-Engineer-Role-stage
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-ce-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Cloud-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-ce-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Cloud-Engineer-Role-prod
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-ce-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: core-Cloud-Engineer-Role-prod
+  #   resource_file: templates/corp-aws-create-ce-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-ce-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+###############################################################################
+# END Sub Account Cloud Engineer Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account Networking Engineer Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Networking-Engineer-Role
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-networkengr-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Networking-Engineer-Role
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-networkengr-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Networking-Engineer-Role
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-networkengr-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Networking-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-networkengr-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Networking-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-networkengr-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Networking-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-networkengr-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Networking-Engineer-Role-stage
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-networkengr-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Networking-Engineer-Role-stage
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-networkengr-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Networking-Engineer-Role-nonprod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-networkengr-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Networking-Engineer-Role-prod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-networkengr-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: core-Networking-Engineer-Role-prod
+  #   resource_file: templates/corp-aws-create-networkengr-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-networkengr-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+###############################################################################
+# END Sub Account Networking Engineer Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account Read Only Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Read-Only-Role
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-readonly-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Read-Only-Role
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-readonly-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Read-Only-Role
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-readonly-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Read-Only-Role-nonprod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-readonly-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Read-Only-Role-nonprod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-readonly-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Read-Only-Role-nonprod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-readonly-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Read-Only-Role-stage
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-readonly-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Read-Only-Role-stage
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-readonly-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Read-Only-Role-nonprod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-readonly-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Read-Only-Role-prod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-readonly-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: core-Read-Only-Role-prod
+  #   resource_file: templates/corp-aws-create-readonly-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-readonly-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+###############################################################################
+# END Sub Account Read Only Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account Security Auditor Role StackSet                                              #
+###############################################################################
+  # - name: Corp-Security-Auditor-Role
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-secaudit-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - CORP:NonProd
+  #       - CORP:Security
+  #       - CORP:Shared Services
+  #       - CORP:Prod
+  #   regions:
+  #     - us-east-1
+  
+  # - name: PIN-Security-Auditor-Role
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-secaudit-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PIN:NonProd
+  #       - PIN:Prod
+  #       - PIN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Security-Auditor-Role
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-secaudit-role-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - PCN:NonProd
+  #       - PCN:Prod
+  #       - PCN:Security
+  #   regions:
+  #     - us-east-1
+
+  # - name: Corp-Security-Auditor-Role-nonprod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-secaudit-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+  #       - 661997899557
+  #   regions:
+  #     - us-east-1
+  
+  # - name: PIN-Security-Auditor-Role-nonprod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-secaudit-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 685572485099
+  #       - 330036246856
+  #       - 826024395643
+  #       - 438265644178
+  #       - 000419854131
+  #       - 961497627505
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Security-Auditor-Role-nonprod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-secaudit-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 235676957572
+  #       - 477118407689
+  #       - 031498485136
+  #       - 552614023257
+  #   regions:
+  #     - us-east-1
+
+  # - name: PIN-Security-Auditor-Role-stage
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pin-aws-create-secaudit-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+
+  # - name: PCN-Security-Auditor-Role-stage
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/pcn-aws-create-secaudit-role-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Security-Auditor-Role-nonprod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-secaudit-role-nonprod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:NonProd
+  #   regions:
+  #     - us-east-1
+
+  # - name: ss-Security-Auditor-Role-prod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/ss-aws-create-secaudit-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     organizational_units:
+  #       - Shared Services:Prod
+  #   regions:
+  #     - us-east-1
+
+  # - name: core-Security-Auditor-Role-prod
+  #   resource_file: templates/corp-aws-create-secaudit-role-template.yaml
+  #   parameter_file: parameters/common/core-aws-create-secaudit-role-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 974558284777
+  #       - 569990592248
+  #   regions:
+  #     - us-east-1
+###############################################################################
+# END Sub Account Security Auditor Role StackSet                                          #
+###############################################################################
+
+###############################################################################
+# BEGIN Sub Account DS Role (Ds*) StackSet                                    #
+###############################################################################
+
+  # - name: Ds-Iam-Assume-Role-Prod
+  #   resource_file: templates/aws-bp-ds-roles-template.yaml
+  #   parameter_file: parameters/bp-ds/aws-bp-ds-roles-prod-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 
+  #   regions:
+  #     - eu-west-1
+
+  # - name: Ds-Iam-Assume-Role-dev
+  #   resource_file: templates/aws-bp-ds-roles-template.yaml
+  #   parameter_file: parameters/bp-ds/aws-bp-ds-roles-dev-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 661997899557
+  #   regions:
+  #     - eu-west-1
+
+  # - name: Ds-Iam-Assume-Role-stage
+  #   resource_file: templates/aws-bp-ds-roles-template.yaml
+  #   parameter_file: parameters/bp-ds/aws-bp-ds-roles-stage-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 
+  #   regions:
+  #     - eu-west-1
+
+  # - name: Ds-Iam-Assume-Role-sandbox
+  #   resource_file: templates/aws-bp-ds-roles-template.yaml
+  #   parameter_file: parameters/bp-ds/aws-bp-ds-roles-sandbox-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 
+  #   regions:
+  #     - eu-west-1
+
+###############################################################################
+# END Sub Account DS Role (Ds*) StackSet                                      #
+###############################################################################
+
+
+###############################################################################
+# BEGIN Corp Account AzADIDP setup StackSet                                   #
+###############################################################################
+
+  # - name: Ds-AzAD-Idp-dev
+  #   resource_file: templates/corp-aws-create-azad-idp-template.yaml
+  #   parameter_file: parameters/common/corp-aws-create-azad-idp-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 661997899557
+  #       - 986792619989
+  #       - 475487862861
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END Corp Account AzADIDP setup StackSet                                     #
+###############################################################################
+
+
+###############################################################################
+# BEGIN Corp Account AzADIDP auto role assignment StackSet                    #
+###############################################################################
+
+  # - name: Ds-AzAD-Idp-auto-roles-dev
+  #   resource_file: templates/corp-aws-update-azad-idp-roles-template.yaml
+  #   parameter_file: parameters/common/corp-aws-update-azad-idp-roles-parameters.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 661997899557
+  #       - 986792619989
+  #       - 475487862861
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END Corp Account AzADIDP auto role assignment StackSet                    #
+###############################################################################
+
+###############################################################################
+# BEGIN CT Lambda DLQ update deployment StackSet                              #
+###############################################################################
+  # #corp nprod
+  # - name: ct-lambda-sns-dlq-auto-corp-dev
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-corp-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+
+  #   regions:
+  #     - us-east-1
+
+  # #ss nprod
+  # - name: ct-lambda-sns-dlq-auto-ss-dev
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 462486774025
+  #       - 661997899557
+  #       - 400793498197
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn nprod
+  # - name: ct-lambda-sns-dlq-auto-pcn-dev
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 477118407689
+  #       - 552614023257
+  #       - 235676957572
+  #       - 031498485136
+  #   regions:
+  #     - us-east-1
+  
+  # #pin nprod
+  # - name: ct-lambda-sns-dlq-auto-pin-dev
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 000419854131
+  #       - 961497627505
+  #       - 826024395643
+  #       - 438265644178
+  #       - 685572485099
+  #       - 330036246856
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn stage
+  # - name: ct-lambda-sns-dlq-auto-pcn-stage
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+  
+  # #pin stage
+  # - name: ct-lambda-sns-dlq-auto-pin-stage
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+  
+  # #ss prod
+  # - name: ct-lambda-sns-dlq-auto-ss-prod
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 295153922082
+  #       - 832571165299
+  #       - 475487862861
+  #       - 569990592248
+  #       - 974558284777
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn prod
+  # - name: ct-lambda-sns-dlq-auto-pcn-prod
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 578755375060
+  #       - 361168606321
+  #       - 134614566499
+
+  #   regions:
+  #     - us-east-1
+
+  # #pin prod
+  # - name: ct-lambda-sns-dlq-auto-pin-prod
+  #   resource_file: templates/aws-bpx-lambda-dead-letter-sns-queue.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 334491682797
+  #       - 902121462079
+  #       - 706979999124
+  #       - 662159136609
+  #       - 957145408426
+
+  #   regions:
+  #     - us-east-1
+  
+###############################################################################
+# END CT Lambda DLQ update deployment StackSet                               #
+###############################################################################
+
+###############################################################################
+# BEGIN CT Lambda Disable inactive IAM User  deployment StackSet              #
+###############################################################################
+  # #corp nprod
+  # - name: ct-lambda-inactive-iam-user-corp-dev
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-corp-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+
+  #   regions:
+  #     - us-east-1
+
+  # #ss nprod
+  # - name: ct-lambda-inactive-iam-user-ss-dev
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 462486774025
+  #       - 661997899557
+  #       - 400793498197
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn nprod
+  # - name: ct-lambda-inactive-iam-user-pcn-dev
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 477118407689
+  #       - 552614023257
+  #       - 235676957572
+  #       - 031498485136
+  #   regions:
+  #     - us-east-1
+  
+  # #pin nprod
+  # - name: ct-lambda-inactive-iam-user-pin-dev
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 000419854131
+  #       - 961497627505
+  #       - 826024395643
+  #       - 438265644178
+  #       - 685572485099
+  #       - 330036246856
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn stage
+  # - name: ct-lambda-inactive-iam-user-stage
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+  
+  # #pin stage
+  # - name: ct-lambda-inactive-iam-user-pin-stage
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+  
+  # #ss prod
+  # - name: ct-lambda-inactive-iam-user-ss-prod
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 295153922082
+  #       - 832571165299
+  #       - 475487862861
+  #       - 569990592248
+  #       - 974558284777
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn prod
+  # - name: ct-lambda-inactive-iam-user-pcn-prod
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 578755375060
+  #       - 361168606321
+  #       - 134614566499
+
+  #   regions:
+  #     - us-east-1
+
+  # #pin prod
+  # - name: ct-lambda-inactive-iam-user-pin-prod
+  #   resource_file: templates/aws-bpx-lambda-disable-iam-user-access-key-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 334491682797
+  #       - 902121462079
+  #       - 706979999124
+  #       - 662159136609
+  #       - 957145408426
+
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END CT Lambda Disable inactive IAM User  deployment StackSet              #
+###############################################################################
+
+###############################################################################
+# BEGIN CT Lambda Enable PITR and OnDemand Capacity for DynamoDB StackSet     #
+###############################################################################
+  # #corp nprod
+  # - name: ct-lambda-dynamodb-pitr-corp-dev
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-corp-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 986792619989
+
+  #   regions:
+  #     - us-east-1
+
+  # #ss nprod
+  # - name: ct-lambda-dynamodb-pitr-ss-dev
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 462486774025
+  #       - 661997899557
+  #       - 400793498197
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn nprod
+  # - name: ct-lambda-dynamodb-pitr-pcn-dev
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 477118407689
+  #       - 552614023257
+  #       - 235676957572
+  #       - 031498485136
+  #   regions:
+  #     - us-east-1
+  
+  # #pin nprod
+  # - name: ct-lambda-dynamodb-pitr-pin-dev
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-nprod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 000419854131
+  #       - 961497627505
+  #       - 826024395643
+  #       - 438265644178
+  #       - 685572485099
+  #       - 330036246856
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn stage
+  # - name: ct-lambda-dynamodb-pitr-stage
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 556996255293
+  #   regions:
+  #     - us-east-1
+  
+  # #pin stage
+  # - name: ct-lambda-dynamodb-pitr-pin-stage
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-stage.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 104795361603
+  #   regions:
+  #     - us-east-1
+  
+  # #ss prod
+  # - name: ct-lambda-dynamodb-pitr-ss-prod
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-ss-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 295153922082
+  #       - 832571165299
+  #       - 475487862861
+  #       - 569990592248
+  #       - 974558284777
+
+  #   regions:
+  #     - us-east-1
+
+  # #pcn prod
+  # - name: ct-lambda-dynamodb-pitr-pcn-prod
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pcn-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 578755375060
+  #       - 361168606321
+  #       - 134614566499
+
+  #   regions:
+  #     - us-east-1
+
+  # #pin prod
+  # - name: ct-lambda-dynamodb-pitr-pin-prod
+  #   resource_file: templates/aws-bpx-lambda-enable-pitr-dynamodb-template.yaml
+  #   parameter_file: parameters/common/ct/aws-bpx-lambda-dead-letter-sns-queue-pin-prod.json
+  #   deploy_method: stack_set
+  #   deployment_targets:
+  #     accounts:
+  #       - 334491682797
+  #       - 902121462079
+  #       - 706979999124
+  #       - 662159136609
+  #       - 957145408426
+
+  #   regions:
+  #     - us-east-1
+
+###############################################################################
+# END CT Lambda Enable PITR and OnDemand Capacity for DynamoDB StackSet       #
+###############################################################################

@@ -1,0 +1,11 @@
+[
+{
+   "ParameterKey": "ADEnvironment",
+   "ParameterValue": "Prod"
+ },
+ {
+   "ParameterKey": "ADLambdaName",
+   "ParameterValue": "delVpc"
+ }
+
+] 
